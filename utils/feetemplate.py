@@ -19,7 +19,17 @@ def feetemplate():
                   border-top: solid 10px green;">
                     <thead>
                     <tr>
-                        <th style="text-align:left;">learningdhara.com</th>
+                        <th style="text-align:left;">
+                            <img style="max-width: 40px;"
+                             src="../images/2452184.png"
+                             alt="learningdhara.com" />
+                            <a href="https://www.learningdhara.com/">
+                            learningdhara.com</a>
+                            <p style="font-size:9px;">
+                            <span style="font-weight:bold;">
+                            (Community towards new technology learning)</span>
+                            </p>
+                            </th>
                         <th style="text-align:right;font-weight:400;">
                         {receiptdate}</th>
                     </tr>
