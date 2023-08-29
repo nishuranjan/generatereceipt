@@ -22,6 +22,11 @@ def storefeedetails(target: str):
     return True
 
 
-def sentemail():
+def sendemail():
+
+    return True
+
+
+def audittrails():
 
     return True

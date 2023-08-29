@@ -1,5 +1,9 @@
-from utils.feedetails import readfeedetails
-from utils.feetemplate import createtemplate
+import datetime
+from utils.feedetails import (readfeedetails,
+                              storefeedetails,
+                              sendemail,
+                              audittrails)
+from utils.feetemplate import feetemplate
 
 
 def generate():
@@ -16,4 +20,4 @@ def generate():
     feedetails = readfeedetails("source/feedetails.csv")
 
     # replace the template variable
-    output = createtemplate()
+    template = feetemplate()

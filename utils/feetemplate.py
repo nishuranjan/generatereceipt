@@ -1,5 +1,5 @@
 # Write some template
-def createtemplate():
+def feetemplate():
     """"
     creating html template with variable
     """
