@@ -2,7 +2,6 @@ import csv
 from datetime import datetime
 from utils.utils import get_uuid, last_day_of_month
 
-
 variable_mapping = {
     'Timestamp': 'receiptdate',
     'Fee Status': 'status',
@@ -71,8 +70,7 @@ def get_fee_details_with_csv_reader(file_path: str):
         for row in reader:
             record = {}
             for i, value in enumerate(row):
-                record[variable_mapping[headers[i]]] = value
-                
+                record[variable_mapping[headers[i]]] = value   
             date_of_payment =  datetime.strptime('Aug 2023', '%b %Y')
             record['startdate'] = date_of_payment.strftime('%d/%m/%Y')
             record['enddate'] = last_day_of_month(date_of_payment).date().strftime('%d/%m/%Y')
