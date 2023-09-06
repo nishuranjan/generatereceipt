@@ -2,7 +2,7 @@ import csv
 from datetime import datetime
 from utils.utils import get_uuid, last_day_of_month
 
-variable_mapping = {
+mapping = {
     'Timestamp': 'receiptdate',
     'Fee Status': 'status',
     'Payment Id': 'transactionid',
@@ -11,43 +11,38 @@ variable_mapping = {
     'Name': 'name',
     'Email address': 'email',
     'Category': 'classcat',
-    # 'Aug 2023': 'startdate',
-    #'Aug 2023': 'enddate',
-    # 'sign': 'digitalsign',
-      # 'Phone': 'phone',
-    # 'uuid': 'accountid',
 }
 
 def get_fee_details_without_csv_reader(file_path: str):
-    """_summary_
+    """ retrive csv file data in form of dictionary using normal file operation, without using csv module
+
     Args:
-        file_name (str): _description_
+        file_path (str): csv file path
+
+    Returns:
+        list : list of records of fee payment
     """
     fees_data = []
     # opening file
     with open(file_path, 'r', -1, "utf-8") as file:
-        headers = []
-        row_count = 0
+        # headers = file.readline().strip().split(',')
+        headers = next(file).strip().split(',')
         # Reading csv line by line
         for row in file:
-            record = {}
-            row_count += 1
-            row = row.strip()
-            if row_count == 1:
-                headers = row.split(',')
-                print(headers)
-                continue
-            details = row.split(',')
-            print(details)
-            for i, value in enumerate(details):
-                record[variable_mapping[headers[i]]] = value
+            record = row.strip().split(',')
             
+            # using dictionary comprehension
+            record = {mapping[headers[i]] : value  for i, value in enumerate(record)}
+            
+            #Addition key value
             date_of_payment =  datetime.strptime('Aug 2023', '%b %Y')
-            record['startdate'] = date_of_payment.strftime('%d/%m/%Y')
-            record['enddate'] = last_day_of_month(date_of_payment).date().strftime('%d/%m/%Y')
-            record['accountid'] = get_uuid()
-            record['digitalsign'] = 'digital sign'
-            record['phone'] = '1234567'
+            record = record | {
+                'startdate': date_of_payment.strftime('%d/%m/%Y'),
+                'enddate' : last_day_of_month(date_of_payment).date().strftime('%d/%m/%Y'),
+                'accountid' : get_uuid(),
+                'digitalsign' : 'digital sign',
+                'phone' : '1234567',
+            }
             fees_data.append(record)
             
         file.close()
@@ -55,9 +50,13 @@ def get_fee_details_without_csv_reader(file_path: str):
 
 
 def get_fee_details_with_csv_reader(file_path: str):
-    """_summary_
+    """ retrive csv file data in form of dictionary using csv module
+
     Args:
-        file_name (str): _description_
+        file_path (str): csv file path
+
+    Returns:
+        list : list of records of fee payment
     """
     fees_data = []
     
@@ -68,17 +67,19 @@ def get_fee_details_with_csv_reader(file_path: str):
     
         # Reading csv line by line
         for row in reader:
-            record = {}
-            for i, value in enumerate(row):
-                record[variable_mapping[headers[i]]] = value   
-            date_of_payment =  datetime.strptime('Aug 2023', '%b %Y')
-            record['startdate'] = date_of_payment.strftime('%d/%m/%Y')
-            record['enddate'] = last_day_of_month(date_of_payment).date().strftime('%d/%m/%Y')
-            record['accountid'] = get_uuid()
-            record['digitalsign'] = 'digital sign'
-            record['phone'] = '1234567'
-            fees_data.append(record)
+            # with dictionary comprehension
+            record = {mapping[headers[i]] : value  for i, value in enumerate(row)}
             
+            #Addition key value
+            date_of_payment =  datetime.strptime('Aug 2023', '%b %Y')
+            record = record | {
+                'startdate': date_of_payment.strftime('%d/%m/%Y'),
+                'enddate' : last_day_of_month(date_of_payment).date().strftime('%d/%m/%Y'),
+                'accountid' : get_uuid(),
+                'digitalsign' : 'digital sign',
+                'phone' : '1234567',
+            }
+            fees_data.append(record)
         file.close()
     return fees_data
    
