@@ -32,3 +32,7 @@ https://learningdhara.atlassian.net/wiki/spaces/LearningDe/pages/10617982/Genera
 6. Follow Solid Principles
 7. Add appropriate design patterns
 8. Run the dependencies from requirement.txt
+
+### Contributors ###############################
+Pramod Kumar
+
