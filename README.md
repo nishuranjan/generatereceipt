@@ -34,5 +34,6 @@ https://learningdhara.atlassian.net/wiki/spaces/LearningDe/pages/10617982/Genera
 8. Run the dependencies from requirement.txt
 
 ### Contributors ###############################
-Pramod Kumar
-Ashish Kapoor
+1. Pramod Kumar
+2. Ashish Kapoor
+3. Akarsh raj
